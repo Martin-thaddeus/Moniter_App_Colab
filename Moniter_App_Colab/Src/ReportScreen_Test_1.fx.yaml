@@ -1,0 +1,396 @@
+ReportScreen_Test_1 As screen:
+
+    LblAppName2_4 As label:
+        Align: =Align.Center
+        DisabledColor: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(153, 207, 236, 1)
+        Height: =185
+        Size: =50
+        Text: ="Report Screen"
+        Width: =640
+        Wrap: =false
+        ZIndex: =4
+
+    Form1_1 As form:
+        DataSource: =ReportList
+        Height: =951
+        Item: =Defaults(ReportList)
+        Width: =640
+        Y: =185
+        ZIndex: =5
+
+        CM_DataCard2 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="CM"
+            Default: =ThisItem.CM
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@ReportList],DataSourceInfo.DisplayName,"CM")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@ReportList], DataSourceInfo.MaxLength, "CM")
+            Required: =false
+            Update: =DataCardValue2.Text
+            Visible: =true
+            Width: =640
+            X: =0
+            Y: =3
+            ZIndex: =1
+
+            DataCardKey4 As label:
+                AutoHeight: =true
+                Height: =48
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue2 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =70
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =21
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey4.Y + DataCardKey4.Height + 5
+                ZIndex: =2
+
+            ErrorMessage12 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue2.Y + DataCardValue2.Height
+                ZIndex: =3
+
+            StarVisible12 As label:
+                Align: =Align.Center
+                Height: =DataCardKey4.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey4.Y
+                ZIndex: =4
+
+        "'Weekly Goal_DataCard3' As typedDataCard.textualEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="WeeklyGoal"
+            Default: =ThisItem.'Weekly Goal'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@ReportList],DataSourceInfo.DisplayName,"WeeklyGoal")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@ReportList], DataSourceInfo.MaxLength, "WeeklyGoal")
+            Required: =false
+            Update: |-
+                =Concat(ComboBox1.SelectedItems, 'Task To Do', "
+                ")
+            Width: =640
+            X: =0
+            Y: =4
+            ZIndex: =1
+
+            DataCardKey6 As label:
+                AutoHeight: =true
+                Height: =48
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            ErrorMessage27 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =ComboBox1.Y + ComboBox1.Height
+                ZIndex: =3
+
+            StarVisible27 As label:
+                Align: =Align.Center
+                Height: =DataCardKey6.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey6.Y
+                ZIndex: =4
+
+            ComboBox1 As combobox:
+                DefaultSelectedItems: =(Sort(Filter(WeeklyTasks, 'Short Term Goal' = Dropdown7.SelectedText.Value).'Task To Do', ThisItem.Created))
+                DisplayFields: =["TaskToDo"]
+                Height: =70
+                Items: =(Sort(Filter(WeeklyTasks, 'Short Term Goal' = Dropdown7.SelectedText.Value).'Task To Do', ThisItem.Created))
+                SearchFields: =["TaskToDo"]
+                SearchItems: =Search((Sort(Filter(WeeklyTasks, 'Short Term Goal' = Dropdown7.SelectedText.Value).'Task To Do', ThisItem.Created)),ComboBox1.SearchText,"TaskToDo")
+                Size: =21
+                Width: =575
+                X: =30
+                Y: =60
+                ZIndex: =5
+
+        Title_DataCard1_1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Title"
+            Default: =ThisItem.Title
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="Title"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =125
+            MaxLength: =DataSourceInfo([@ReportList], DataSourceInfo.MaxLength, "Title")
+            Required: =true
+            Update: =Dropdown5.SelectedText.Value
+            Width: =640
+            X: =0
+            Y: =0
+            ZIndex: =6
+
+            DataCardKey9_1 As label:
+                AutoHeight: =true
+                Height: =48
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            ErrorMessage7_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =Dropdown5.Y + Dropdown5.Height
+                ZIndex: =3
+
+            StarVisible7_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey9_1.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey9_1.Y
+                ZIndex: =4
+
+            Dropdown5 As dropdown:
+                Default: =""
+                Height: =70
+                Items: =Credentials.Title
+                Size: =21
+                Width: =575
+                X: =30
+                Y: =55
+                ZIndex: =5
+
+        "'Long Term Goal_DataCard1_1' As typedDataCard.textualEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="LongTermGoals"
+            Default: =ThisItem.'Long Term Goal'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@ReportList],DataSourceInfo.DisplayName,"LongTermGoals")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@ReportList], DataSourceInfo.MaxLength, "LongTermGoals")
+            Required: =false
+            Update: =Dropdown6.SelectedText.Value
+            Width: =640
+            X: =0
+            Y: =1
+            ZIndex: =6
+
+            DataCardKey10_1 As label:
+                AutoHeight: =true
+                Height: =48
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            ErrorMessage8_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =Dropdown6.Y + Dropdown6.Height
+                ZIndex: =3
+
+            StarVisible8_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey10_1.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey10_1.Y
+                ZIndex: =4
+
+            Dropdown6 As dropdown:
+                Default: =""
+                Height: =70
+                Items: |-
+                    =[(First(Filter(LongTermGoals, Title = Dropdown5.SelectedText.Value).'What is your long term education goal ?  eg. graduation, accomplishing a degree/program/license.').'What is your long term education goal ?  eg. graduation, accomplishing a degree/program/license.'),
+                     (First(Filter(LongTermGoals, Title = Dropdown5.SelectedText.Value).'What is your long term career goal?  eg. promotion at your current job, getting a full-time job in your desired career goal. ').'What is your long term career goal?  eg. promotion at your current job, getting a full-time job in your desired career goal. '),
+                     (First(Filter(LongTermGoals, Title = Dropdown5.SelectedText.Value).'What is your long term financial goal?  eg. save up 15% of your total income, being financially independent. ').'What is your long term financial goal?  eg. save up 15% of your total income, being financially independent. '),
+                    (First(Filter(LongTermGoals, Title = Dropdown5.SelectedText.Value).'What is your long term health goal?  eg. recovering from an injury, having a healthier diet').'What is your long term health goal?  eg. recovering from an injury, having a healthier diet'),
+                    (First(Filter(LongTermGoals, Title = Dropdown5.SelectedText.Value).'What is your long term family/friends/relationship goal ? eg. reconnecting with family members, makes good friends').'What is your long term family/friends/relationship goal ? eg. reconnecting with family members, makes good friends'),
+                    (First(Filter(LongTermGoals, Title = Dropdown5.SelectedText.Value).'What is your long term accountability goal? eg. being punctual for your school/work').'What is your long term accountability goal? eg. being punctual for your school/work'),
+                    (First(Filter(LongTermGoals, Title = Dropdown5.SelectedText.Value).'What is your long term personal goal?  eg. new hobbies, new language, building confidence').'What is your long term personal goal?  eg. new hobbies, new language, building confidence')
+                    ]
+                Size: =21
+                Width: =575
+                X: =30
+                Y: =60
+                ZIndex: =5
+
+        "'Short Term Goal_DataCard1_1' As typedDataCard.textualEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="ShortTermGoal"
+            Default: =ThisItem.'Short Term Goal'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@ReportList],DataSourceInfo.DisplayName,"ShortTermGoal")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@ReportList], DataSourceInfo.MaxLength, "ShortTermGoal")
+            Required: =false
+            Update: =Dropdown7.SelectedText.Value
+            Width: =640
+            X: =0
+            Y: =2
+            ZIndex: =6
+
+            DataCardKey20_1 As label:
+                AutoHeight: =true
+                Height: =48
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            ErrorMessage9_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =Dropdown7.Y + Dropdown7.Height
+                ZIndex: =3
+
+            StarVisible9_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey20_1.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey20_1.Y
+                ZIndex: =4
+
+            Dropdown7 As dropdown:
+                Default: =""
+                Height: =70
+                Items: |-
+                    =Filter(WeeklyTasks, Title = Dropdown5.SelectedText.Value, 'Long Term Goal'.Value = Dropdown6.SelectedText.Value).'Short Term Goal'
+                    
+                    
+                    //Filter(WeeklyTasks,Title = Dropdown5.SelectedText.Value, "Long Term Goal" = Dropdown6.SelectedText.Value).'Short Term Goal'
+                    
+                    //Filter(WeeklyTasks,Title = Dropdown5.SelectedText.Value, ThisItem.'Long Term Goal' = Dropdown6.SelectedText.Value).'Short Term Goal'
+                Size: =21
+                Width: =575
+                X: =30
+                Y: =58
+                ZIndex: =5
+
+    PageBackButton_6 As icon.Add:
+        Color: =RGBA(255, 255, 255, 1)
+        Icon: =Icon.BackArrow
+        OnSelect: =Navigate(Homepage_staff)
+        X: =18
+        Y: =60
+        ZIndex: =7
+
+    IconAccept3_3 As icon.Check:
+        AccessibleLabel: =Self.Tooltip
+        Height: =79
+        Icon: =Icon.Check
+        OnSelect: |-
+            =SubmitForm(Form1_1);
+            //Navigate(Homepage_staff)
+        PaddingBottom: =22
+        PaddingLeft: =22
+        PaddingRight: =22
+        PaddingTop: =22
+        TabIndex: =0
+        Tooltip: ="Submit item"
+        Width: =88
+        X: =552
+        Y: =45
+        ZIndex: =9
+
