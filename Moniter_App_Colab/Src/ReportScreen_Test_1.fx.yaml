@@ -106,6 +106,7 @@ ReportScreen_Test_1 As screen:
             Update: |-
                 =Concat(ComboBox1.SelectedItems, 'Task To Do', "
                 ")
+            Visible: =false
             Width: =640
             X: =0
             Y: =4
