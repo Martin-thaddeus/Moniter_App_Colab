@@ -162,6 +162,74 @@ ReportScreen_Test_1 As screen:
                 Y: =60
                 ZIndex: =5
 
+        Date_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Date"
+            Default: =ThisItem.Date
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@ReportList],DataSourceInfo.DisplayName,"Date")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@ReportList], DataSourceInfo.MaxLength, "Date")
+            Required: =false
+            Update: =//Concat(ComboBox2.SelectedItems,'Date', "")
+            Width: =640
+            X: =0
+            Y: =5
+            ZIndex: =1
+
+            DataCardKey5 As label:
+                AutoHeight: =true
+                Height: =48
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            ErrorMessage20 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =ComboBox2.Y + ComboBox2.Height
+                ZIndex: =3
+
+            StarVisible20 As label:
+                Align: =Align.Center
+                Height: =DataCardKey5.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey5.Y
+                ZIndex: =4
+
+            ComboBox2 As combobox:
+                DefaultSelectedItems: =
+                DisplayFields: =["Title"]
+                Height: =70
+                IsSearchable: =false
+                Items: =Filter(WeeklyTasks, 'Short Term Goal' = Dropdown7.SelectedText.Value).Date
+                SearchFields: =["Title"]
+                SearchItems: =[]
+                Size: =21
+                Width: =575
+                X: =30
+                Y: =58
+                ZIndex: =5
+
         Title_DataCard1_1 As typedDataCard.textualEditCard:
             BorderStyle: =BorderStyle.Solid
             DataField: ="Title"
